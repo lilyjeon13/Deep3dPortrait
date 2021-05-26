@@ -236,7 +236,7 @@ def depth_recon(data_path, save_path):
             input_tri: np.expand_dims(head_tri, 0) - 1,
         })
 
-        # # Get Texture from coefficient
+        # Get Texture from coefficient
 
         facemodel = read_facemodel()
         coeff = face3d_data_input[:,3:260]
@@ -260,7 +260,7 @@ def depth_recon(data_path, save_path):
             'hairear_texture': h_texture.squeeze(0),
             'hairear_tri': data_input['points_tri'],
             'face_shape': data_input['face_shape'],
-             #'face_texture': face_color,
+            #'face_texture': face_color,
             'face_texture': f_texture.squeeze(0),
             'face_tri': data_input['face_tri'],
             'hairear_index': data_input['points_index'],
