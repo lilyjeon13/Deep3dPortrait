@@ -21,9 +21,7 @@ def filemaking(input_img):
     input_path = 'inputs'
     expr_img = [i for i in os.listdir(expr_path) if (i.endswith('png') or i.endswith('jpg') or i.endswith('jpeg')) and (i[:2] != '._') ]
     get_face_alignment(expr_path, expr_path, debug='store_true')
-    # degree = 100
     src_img = os.path.join(input_path, input_img)
-    # face_recon(src_img, os.path.join(expr_path, 'anger.png'), input_path, 'outputs/step1', input_img + '_no_change','outputs/step1/vis', degree=0)
     for target in expr_img :
         for degree in range(0, 110, 10):
             output_name = src_img.split(os.path.sep)[1].split('.')[0] + '_' + target.split('.')[0] +'_' + str(degree) + '%'
@@ -55,7 +53,7 @@ def filemaking(input_img):
 if __name__ == "__main__":
     # app.run(host='0.0.0.0',port=8888)
     parser = argparse.ArgumentParser()
-    parser.add_argument('--input_img', default='goyoonjung.jpg')
+    parser.add_argument('--input_img', default='AI_gen.jpg')
     args = parser.parse_args()
     filemaking(args.input_img)
 

@@ -215,7 +215,9 @@ def face_recon(src_path, tgt_path, input_path, output_path, output, vis_path=Non
     # transfer target expression to source expression 
     degree = degree/100
     coeff[:, 80:144] = tgt_coeff[:, 80:144] * degree + coeff[:, 80:144] * (1-degree)
-    
+    # from step1_3_manipulate_illumination
+    coeff[:, 227:254] = tgt_coeff[:, 227:254] * degree + tgt_coeff[:, 227:254]* (1-degree)
+
     # preprocess input image for depth recon net
     # reproject the reconstructed face to raw image with adjusted focal and center
     f = focal * inv_params[0]

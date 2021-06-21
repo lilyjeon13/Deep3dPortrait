@@ -163,6 +163,7 @@ def Illumination_block(face_texture,norm_r,gamma):
     color_r = tf.squeeze(tf.matmul(Y,tf.expand_dims(gamma[:,0,:],2)),axis = 2)
     color_g = tf.squeeze(tf.matmul(Y,tf.expand_dims(gamma[:,1,:],2)),axis = 2)
     color_b = tf.squeeze(tf.matmul(Y,tf.expand_dims(gamma[:,2,:],2)),axis = 2)
+    
     face_texture = tf.expand_dims(face_texture, axis = 0)
     #[batchsize,N,3] vertex color in RGB order
     face_color = tf.stack([color_r*face_texture[:,:,0],color_g*face_texture[:,:,1],color_b*face_texture[:,:,2]],axis = 2)
@@ -237,7 +238,6 @@ def depth_recon(data_path, save_path):
         })
 
         # Get Texture from coefficient
-
         facemodel = read_facemodel()
         coeff = face3d_data_input[:,3:260]
         tex_coeff = coeff[:,144:224]
@@ -253,6 +253,8 @@ def depth_recon(data_path, save_path):
         face_color = Illumination_block(face_texture, norm_r, gamma)
         face_color = face_color.numpy()
         face_color = np.squeeze(face_color)
+        # face texture clipping to 0~255
+        face_color = np.clip(face_color, 0, 255)
         face_xyz = data_input['face_shape'].astype(np.float32)
 
         result = {
@@ -260,8 +262,7 @@ def depth_recon(data_path, save_path):
             'hairear_texture': h_texture.squeeze(0),
             'hairear_tri': data_input['points_tri'],
             'face_shape': data_input['face_shape'],
-            #'face_texture': face_color,
-            'face_texture': f_texture.squeeze(0),
+            'face_texture': face_color,
             'face_tri': data_input['face_tri'],
             'hairear_index': data_input['points_index'],
             'facemask_withouthair': data_input['facemask_withouthair'],
@@ -277,14 +278,14 @@ def depth_recon(data_path, save_path):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--root_dir', default='')
+    parser.add_argument('--root_dir', default='.')
     args = parser.parse_args()
 
     data_path = os.path.join(args.root_dir, 'output/step2') 
     save_path = os.path.join(args.root_dir, 'output/step3') 
     if not os.path.isdir(save_path):
         os.makedirs(save_path)
-    os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
+    # os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
     # recon depth and recover the head geometry
     depth_recon(data_path, save_path)
     
