@@ -163,7 +163,7 @@ def Illumination_block(face_texture,norm_r,gamma):
     color_r = tf.squeeze(tf.matmul(Y,tf.expand_dims(gamma[:,0,:],2)),axis = 2)
     color_g = tf.squeeze(tf.matmul(Y,tf.expand_dims(gamma[:,1,:],2)),axis = 2)
     color_b = tf.squeeze(tf.matmul(Y,tf.expand_dims(gamma[:,2,:],2)),axis = 2)
-    
+
     face_texture = tf.expand_dims(face_texture, axis = 0)
     #[batchsize,N,3] vertex color in RGB order
     face_color = tf.stack([color_r*face_texture[:,:,0],color_g*face_texture[:,:,1],color_b*face_texture[:,:,2]],axis = 2)
@@ -221,7 +221,6 @@ def depth_recon(data_path, save_path):
                 input_uv: hairear_uv_input,
                 input_facedata: face3d_data_input
         })
-        
 
         # render head depth
         head_xyz = np.concatenate([
@@ -241,7 +240,7 @@ def depth_recon(data_path, save_path):
         facemodel = read_facemodel()
         coeff = face3d_data_input[:,3:260]
         tex_coeff = coeff[:,144:224]
-        face_texture = Texture_formation_block(tex_coeff, facemodel)
+        face_texture = Texture_formation_block(tex_coeff, facemodel)[:, ::-1] # rgb to bgr
 
         angles = coeff[:,224:227]
         rotation = Compute_rotation_matrix(angles)
