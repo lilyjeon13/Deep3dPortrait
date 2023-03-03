@@ -10,18 +10,10 @@ import requests
 import PyQt5
 import sys
 from pywavefront import visualization, Wavefront
-def file_upload():
-    files = {'file': open(os.path.join(os.getcwd(),'input.png'),'rb')}
-    r = requests.post("http://s3.ciplab.ml:5443/", files=files)
-    # print(r.content.decode('utf-8'))
-    f = open("output.obj", "w")
-    f.write(r.content.decode('utf-8'))
-    f.close()
-    # print("gi")
+    
 vertss=[]
 colorss = []
 class MyApp(QWidget):
-    
     def __init__(self):
         self.rotation = 0
         self.d = gl.GLViewWidget()
@@ -38,9 +30,6 @@ class MyApp(QWidget):
         objectBox = QVBoxLayout()
         controlBox = QVBoxLayout()
         mainBox.addChildLayout(controlBox)
-        # objectBox.addStretch(1)
-        # objectBox.addStretch(1)
-        # controlBox.addStretch(2)
         mainBox.addLayout(objectBox)
         labels = ["Head Position", "Anger", "Contempt", "Disgust", "Fear", "Joy", "Sadness", "Surprise"]
         for i in range(8):
@@ -64,10 +53,6 @@ class MyApp(QWidget):
             hbox.addWidget(sld)
             objectBox.addLayout(hbox)
 
-        # objectBox.addWidget(sld)
-        # root_path = os.path.dirname(__file__)
-        # file_upload()
-        # exit(1)
         imgs_path = "result"
         sorted_list = sorted(os.listdir(imgs_path))
         # change the sequence on files in imgs_path
@@ -102,11 +87,6 @@ class MyApp(QWidget):
         self.d.addItem(self.m2)
         self.d.setFixedWidth(1000)
         self.d.setFixedHeight(1000)
-        # self.d.setCameraPosition(fov=45)
-        # self.d.setCameraPosition(pos=QtGui.QVector3D(0,0,0), distance=10, elevation=0, azimuth=0, rotation=45)
-        # self.d.opts["fov"]=45
-        # print(self.d.opts['vie(wport'])
-        # self.d.opts["rotation"]=(45,1,1,100)
         self.d.setCameraPosition(distance=5)
         self.d.opts["rotationMethod"]="quaternion"
         controlBox.addWidget(self.d)
@@ -115,7 +95,6 @@ class MyApp(QWidget):
         self.setWindowTitle('My App')
         self.setGeometry(0,0,1600,1300)
         self.show()
-
 
     def rotateChange(self, value):
         q = QtGui.QQuaternion.fromEulerAngles(
@@ -126,13 +105,11 @@ class MyApp(QWidget):
 
     def expressChanged(self, value):
         idx = (value//11)
-        # print(vertss[value])
         self.m2.setMeshData(vertexes=vertss[value],vertexColors=colorss[value])
         self.m2.meshDataChanged()
         for i in range(len(self.bars)):
             if i != idx:
                 self.bars[i].setValue(i*10)
-                # self.bars[i].update()
         self.d.update()
 
 if __name__ == '__main__':
