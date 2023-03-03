@@ -1,5 +1,11 @@
 # Deep 3d Portrait from a Single Image
 
+## Presentation
+- Presentation 
+  - video: [Youtube link](https://youtu.be/t_XTpc22P8Y)
+  - pdf: [Deep3dPortrait/presentation.pdf](https://github.com/lylajeon/Deep3dPortrait/blob/main/presentation.pdf)
+  - final report: [report link](https://github.com/lylajeon/Deep3dPortrait/blob/main/Final_Report.pdf)
+
 ## Summary
 
 This repostiory is forked from [sicxu/Deep3dPortrait](https://github.com/sicxu/Deep3dPortrait).
