@@ -10,7 +10,7 @@
 
 This repostiory is forked from [sicxu/Deep3dPortrait](https://github.com/sicxu/Deep3dPortrait).
 
-## Prepare GAN Training
+## Use custom image to generate 3d portrait objects of various expressions
 
 ```
 git clone https://github.com/lylajeon/Deep3dPortrait Deep3dPortrait
