@@ -1,10 +1,9 @@
-# Deep 3d Portrait from a Single Image
+# Deep 3d Portrait from a Single Image (CVPR2020)
 
 ## Presentation
-- Presentation 
-  - video: [Youtube link](https://youtu.be/t_XTpc22P8Y)
-  - pdf: [Deep3dPortrait/presentation.pdf](https://github.com/lylajeon/Deep3dPortrait/blob/main/presentation.pdf)
-  - final report: [report link](https://github.com/lylajeon/Deep3dPortrait/blob/main/Final_Report.pdf)
+- video: [Youtube link](https://youtu.be/t_XTpc22P8Y)
+- pdf: [presentation.pdf](https://github.com/lylajeon/Deep3dPortrait/blob/main/presentation.pdf)
+- final report: [report link](https://github.com/lylajeon/Deep3dPortrait/blob/main/Final_Report.pdf)
 
 ## Summary
 
